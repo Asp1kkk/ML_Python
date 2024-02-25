@@ -103,7 +103,7 @@ class Fraction:
 	def __pos__(self) -> 'Fraction':
 		return self.__abs__()
 
-	def neg(self) -> 'Fraction':
+	def __neg__(self) -> 'Fraction':
 		Fraction(-self.a, self.b if self.b != 0 else 1).__reduce()
 
 	def __int__(self) -> int:
