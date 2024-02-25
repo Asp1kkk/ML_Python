@@ -46,17 +46,26 @@ class Fraction:
 
 	def __mul__(self, other) -> 'Fraction':
 		if isinstance(other, Fraction):
-			return Fraction(self.a * other.a, self.b * (other.b if other.b != 0 else 1)).__reduce()
+			return Fraction(self.a * other.a, (self.b if self.b != 0 else 1) * (other.b if other.b != 0 else 1)).__reduce()
 		
 		if isinstance(other, int):
 			return Fraction(self.a * other, self.b if self.b != 0 else 1).__reduce()
 		
 		if isinstance(other, float):
-			return 
-
-		
+			return self.a / (self.b if self.b != 0 else 1) * other
+	
 	def __rmul__(self, other) -> 'Fraction':
 		return self.__mul__(other)
+
+	def __truediv__(self, other) -> 'Fraction':
+		if isinstance(other, Fraction):
+			return Fraction(self.a * (other.b if other.b != 0 else 1), (self.b if self.b != 0 else 1) * other.a).__reduce()
+		
+		if isinstance(other, int):
+			return Fraction(self.a, (self.b if self.b != 0 else 1) * other).__reduce()
+
+	def __rtruediv__(self, other) -> 'Fraction':
+		return self.__truediv__(other)
 
 	def __reduce(self):
 		gcd = math.gcd(self.a, self.b)
@@ -92,4 +101,4 @@ class Fraction:
 		return self.__reduce()
 		
 
-print(Fraction(10) == 10)
+print(Fraction(10) / 2)
