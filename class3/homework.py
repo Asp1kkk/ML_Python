@@ -1,10 +1,48 @@
 import math
+from typing import Union
+
+# 1 and 2
 
 class Fracton:
-	canonical: str
 	def __init__(self, a:int = 0, b:int = 0) -> None:
 		self.a = a
 		self.b = b
+
+	def __eq__(self, other: Union[int, float, 'Fracton']) -> bool:
+		if isinstance(other, int | float):
+			return self.a / self.b == other
+		else:
+			return self.a / self.b == other.a / other.b
+		
+	def __ne__(self, other: Union[int, float, 'Fracton']) -> bool:
+		if isinstance(other, int | float):
+			return self.a / self.b != other
+		else:
+			return self.a / self.b != other.a / other.b
+		
+	def __gt__(self, other: Union[int, float, 'Fracton']) -> bool:
+		if isinstance(other, int | float):
+			return self.a / self.b > other
+		else:
+			return self.a / self.b > other.a / other.b
+
+	def __lt__(self, other: Union[int, float, 'Fracton']) -> bool:
+		if isinstance(other, int | float):
+			return self.a / self.b < other
+		else:
+			return self.a / self.b < other.a / other.b
+
+	def __ge__(self, other: Union[int, float, 'Fracton']) -> bool:
+		if isinstance(other, int | float):
+			return self.a / self.b >= other
+		else:
+			return self.a / self.b >= other.a / other.b
+
+	def __le__(self, other: Union[int, float, 'Fracton']) -> bool:
+		if isinstance(other, int | float):
+			return self.a / self.b <= other
+		else:
+			return self.a / self.b <= other.a / other.b
 
 	def __reduce(self):
 		gcd = math.gcd(self.a, self.b)
