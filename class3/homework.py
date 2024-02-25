@@ -97,6 +97,24 @@ class Fraction:
 	def __isub__(self, other) -> 'Fraction':
 		return self.__sub__(self.__sub__(other))
 
+	def __abs__(self) -> 'Fraction':
+		return Fraction(abs(self.a), abs(self.b if self.b != 0 else 1)).__reduce()
+
+	def __pos__(self) -> 'Fraction':
+		return self.__abs__()
+
+	def neg(self) -> 'Fraction':
+		Fraction(-self.a, self.b if self.b != 0 else 1).__reduce()
+
+	def __int__(self) -> int:
+		return int(self.a / (self.b if self.b != 0 else 1))
+
+	def __round__(self, nd) -> float:
+		return round((self.a / (self.b if self.b != 0 else 1)), ndigits=nd)
+
+	def __float__(self) -> float:
+		return float(self.a / (self.b if self.b != 0 else 1))
+
 	def __reduce(self):
 		gcd = math.gcd(self.a, self.b)
 		if self.b < 0:
@@ -130,5 +148,3 @@ class Fraction:
 			return f"{self.a}"
 		return self.__reduce()
 	
-
-print()
