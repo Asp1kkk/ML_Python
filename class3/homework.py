@@ -67,6 +67,21 @@ class Fraction:
 	def __rtruediv__(self, other) -> 'Fraction':
 		return self.__truediv__(other)
 
+	def __add__(self, other) -> 'Fraction':
+		if isinstance(other, Fraction):
+			lcm = math.lcm(self.b if self.b != 0 else 1, other.b if other.b != 0 else 1)
+			mulForFirst = lcm/(self.b if self.b != 0 else 1)
+			mulForSecond = lcm/(other.b if other.b != 0 else 1)
+			return Fraction(int(self.a * mulForFirst + other.a * mulForSecond), lcm).__reduce()	
+		if isinstance(other, int):
+			return Fraction(self.a + other * (self.b if self.b != 0 else 1), (self.b if self.b != 0 else 1)).__reduce()
+
+	def __radd__(self, other) -> 'Fraction':
+		return self.__add__(other)
+
+	def __iadd__(self, other) -> 'Fraction':
+		return self.__add__(self.__add__(other))
+
 	def __reduce(self):
 		gcd = math.gcd(self.a, self.b)
 		if self.b < 0:
@@ -101,4 +116,4 @@ class Fraction:
 		return self.__reduce()
 		
 
-print(Fraction(10) / 2)
+print(Fraction(1,2) + 2)
