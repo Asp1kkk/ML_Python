@@ -1,5 +1,6 @@
 import math
 from typing import Union
+import pymorphy2
 
 # 1 and 2
 
@@ -148,3 +149,11 @@ class Fraction:
 			return f"{self.a}"
 		return self.__reduce()
 	
+# 3
+	
+#class Sentence:
+#	def __init__(self) -> None:
+		
+morph = pymorphy2.MorphAnalyzer("")
+print(morph)
+#cats_parsed = morph.parse('котиков')[0]
