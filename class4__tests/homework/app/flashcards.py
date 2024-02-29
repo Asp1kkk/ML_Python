@@ -1,3 +1,5 @@
+import re
+
 class FlashCards():
     def __init__(self):
         self.engs = []
@@ -18,6 +20,8 @@ class FlashCards():
              return "Неправильный тип ввода"
         if russian.strip() == '' or english.strip() == '':
             return "Введите данные"
+        if re.search('[a-zA-Z]', russian):
+            return "Первое слово должно быть русским"
         if russian in self.words:
              return "Такое слово уже есть в словаре"
         self.engs.append(english)
@@ -34,9 +38,3 @@ class FlashCards():
         self.engs.remove(self.engs[self.words.index(russian)])
         self.words.remove(russian)
         return f"Удалено слово '{russian}'"
-
-if __name__ == "__main__":
-    f = FlashCards()
-    f.add_word("груша", "pear")
-    f.delete_word("груша")
-    print(f.play())
