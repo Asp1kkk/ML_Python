@@ -12,6 +12,14 @@ class FlashCards():
         Возвращает строку с количеством правильных ответов/общим количеством 
         слов в словаре (см пример работы). 
         '''
+        if not len(self.words):
+            return "В словаре нет слов"
+        rightAns = 0
+        for word in self.words:
+            guess = input(f"{word}\n")
+            if guess.lower() == self.cards[word]:
+                 rightAns += 1
+        return f"Готово! Правильно {rightAns} из {len(self.words)}"
 
     def add_word(self, russian: str, english: str) -> str:
         if not isinstance(russian, str) or not isinstance(english, str):
@@ -33,10 +41,7 @@ class FlashCards():
 
 if __name__ == "__main__":
 	fc = FlashCards()
-	print(fc.add_word('груша', 'pear'))
-	print(fc.add_word('хурма', 'persimmon'))
-	print(fc.add_word('яблоко', 'apple'))
-	print(fc.delete_word(123))
+	print(fc.add_word("груша", "pear"))
+	print(fc.add_word("яблоко", "apple"))
 	print(fc.words)
-	print(fc.cards)
-    
+	print(fc.play())
