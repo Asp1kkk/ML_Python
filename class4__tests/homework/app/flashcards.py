@@ -30,10 +30,3 @@ class FlashCards():
         self.words.remove(russian)
         del self.cards[russian]
         return f"Удалено слово '{russian}'"
-
-if __name__ == "__main__":
-	fc = FlashCards()
-	print(fc.add_word("груша", "pear"))
-	print(fc.add_word("яблоко", "apple"))
-	print(fc.words)
-	print(fc.play())
