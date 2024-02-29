@@ -154,6 +154,6 @@ class Fraction:
 #class Sentence:
 #	def __init__(self) -> None:
 		
-morph = pymorphy2.MorphAnalyzer("")
+morph = pymorphy2.MorphAnalyzer()
 print(morph)
 #cats_parsed = morph.parse('котиков')[0]
