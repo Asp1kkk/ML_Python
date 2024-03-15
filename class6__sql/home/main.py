@@ -9,3 +9,12 @@ FROM titles
 WHERE premiered < 2018
 ORDER BY premiered DESC
 """
+
+ratingQuery = """
+SELECT title, premiered, rating
+FROM titles
+JOIN rating
+ON rating.title_id == titles.title_id
+ORDER BY rating DESC
+LIMIT 50
+"""
