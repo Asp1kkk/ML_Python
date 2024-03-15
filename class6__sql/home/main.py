@@ -62,3 +62,17 @@ GROUP BY premiered
 def filmsByGenre(genre):
 	return cur.execute(genreByYearQuery, (genre,)).fetchall()
 
+actorsByAgeQuery = """
+SELECT name, born, died,
+	CASE
+		WHEN died IS NOT NULL THEN died - born
+		ELSE CURRENT_DATE - born
+	END AS age
+FROM crew
+JOIN people ON people.person_id == crew.person_id
+WHERE born IS NOT NULL
+GROUP BY people.person_id
+ORDER BY age DESC
+LIMIT 10
+"""
+
