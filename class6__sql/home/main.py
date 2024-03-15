@@ -76,3 +76,15 @@ ORDER BY age DESC
 LIMIT 10
 """
 
+actorsAge100Query = """
+SELECT name, born, died,
+	CASE
+		WHEN died IS NOT NULL THEN died - born
+		ELSE CURRENT_DATE - born
+	END AS age
+FROM crew
+JOIN people ON people.person_id == crew.person_id
+WHERE born IS NOT NULL AND age >= 100
+GROUP BY people.person_id
+ORDER BY age DESC
+"""
