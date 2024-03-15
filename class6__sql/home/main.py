@@ -40,9 +40,13 @@ JOIN crew
 ON crew.title_id == titles.title_id
 JOIN people
 ON people.person_id == crew.person_id
-WHERE people.name in ("Jason Statham", "Ryan Gosling")
+WHERE people.name IN ({})
 ORDER BY premiered DESC
 """
+
+def filmsByActors(*actors):
+	placeholders = ', '.join(['?'] * len(actors))
+	return cur.execute(actorQuery.format(placeholders), actors).fetchall()
 
 genreByYearQuery = """
 SELECT premiered, count(titles.title_id)
@@ -55,6 +59,6 @@ WHERE genre_name == ?
 GROUP BY premiered
 """
 
-def FilmsByGenre(genre):
+def filmsByGenre(genre):
 	return cur.execute(genreByYearQuery, (genre,)).fetchall()
 
