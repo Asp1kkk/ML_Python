@@ -32,3 +32,14 @@ WHERE premiered == 2019 AND genre_name == "Comedy" AND rating >= 7
 ORDER BY VOTES DESC
 LIMIT 10
 """
+
+actorQuery = """
+SELECT title, premiered, name
+FROM titles
+JOIN crew
+ON crew.title_id == titles.title_id
+JOIN people
+ON people.person_id == crew.person_id
+WHERE people.name in ("Jason Statham", "Ryan Gosling")
+ORDER BY premiered DESC
+"""
