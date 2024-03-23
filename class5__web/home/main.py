@@ -5,6 +5,7 @@ from typing import List, Dict
 import pandas as pd
 import time
 from tqdm import tqdm
+import copy
 
 # Новости Иркутска
 
@@ -57,7 +58,8 @@ session = requests.session()
 data = {
 	'time': [],
 	'titles': [],
-	'tags': []
+	'tags': [],
+	'paragraphs': []
 }
 
 for i in tqdm(range(25)): # 1000 требующихся статей / 40 статец на странице = 25 страниц
@@ -74,7 +76,9 @@ for i in tqdm(range(25)): # 1000 требующихся статей / 40 ста
 
 		data['time'].append(article.date)
 		data['titles'].append(article.title)
-		data['tags'].append(article.tags)
+		data['tags'].append(copy.copy(article.tags))
+		data["paragraphs"].append(article.paragraphs)
+
 
 df = pd.DataFrame(data)
 df.to_csv("./data.csv", index=False)
